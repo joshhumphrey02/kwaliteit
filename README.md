@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Todo App — Next.js
 
-## Getting Started
+A highly responsive, modern Todo application built with **Next.js**, **TypeScript**, and **Zustand** for state management.  
+This project provides a clean UI, smooth interactions, and a scalable architecture suitable for personal task tracking or enterprise-level workflow systems.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+### ✅ Core Features
+
+- Create, read, update, and delete tasks
+- Task status management (e.g., _todo_, _in-progress_, _completed_)
+- Task priority levels
+- Assign multiple users to a task
+- Date management (start & end dates)
+- Full client-side state management with Zustand
+- Persisted state (optional)
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer            | Tools                          |
+| ---------------- | ------------------------------ |
+| Framework        | **Next.js 16 / App Router**    |
+| Language         | **TypeScript**                 |
+| State Management | **Zustand**                    |
+| UI Components    | **Chakra UI**                  |
+| Styling          | **TailwindCSS**                |
+| Icons            | **Iconsax Icons**              |
+| Toasts           | **Sonner**                     |
+| Form Handling    | Custom form logic + validation |
+
+---
+
+## 📂 Project Structure
+
+```
+/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── tasks/
+│       └── components/
+│           ├── TaskDialog.tsx
+│           ├── TaskCard.tsx
+│           └── TaskList.tsx
+├── components/
+│   ├── ui/ (chakra-ui/react)
+│   └── shared/
+├── store/
+│   └── task.store.ts
+├── lib/
+│   └── utils.ts
+├── public/
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Installation & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone the repository
 
-## Learn More
+```bash
+git clone https://github.com/joshhumphrey/kwaliteit.git
+cd kwaliteit
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Install dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+bun install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Run development server
 
-## Deploy on Vercel
+```bash
+bun run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Build for production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+bun run build
+```
+
+---
+
+## 🧩 State Management (Zustand)
+
+State management follows a clean **action-based** pattern.
+
+Example actions:
+
+```ts
+addTask();
+updateTask();
+deleteTask();
+updateStatus();
+openDialog();
+closeDialog();
+```
+
+Zustand ensures:
+
+- predictable state updates
+- less boilerplate compared to Redux
+- fast reactivity
+- scalable store structure
+
+---
+
+## 🧪 Validation
+
+All tasks include validation for:
+
+- Name
+- Priority
+- Status
+- Users assigned
+- Start date & end date
+- Description
+- End date must be greater than or equal to start date
+
+---
+
+## 🎨 UI & UX
+
+- Built with **ShadCN UI** (Radix-based components)
+- Smooth transitions
+- Accessible dialogs
+- Keyboard and screen-reader friendly
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
+
+---
+
+## 💬 Author
+
+Built with ❤️ by **Humphrey**.  
+For inquiries or collaboration, feel free to reach out!
