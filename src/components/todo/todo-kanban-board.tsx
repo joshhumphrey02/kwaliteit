@@ -21,8 +21,9 @@ export const TodoKanbanBoard = ({ tasks }: KanbanBoardProps) => {
           icon={
             <Icon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                {tab.icons.map((icon) =>
+                {tab.icons.map((icon, i) =>
                   React.cloneElement(icon, {
+                    key: i,
                     fill: colorMode == "dark" ? "white" : tab.color,
                   })
                 )}
@@ -32,7 +33,7 @@ export const TodoKanbanBoard = ({ tasks }: KanbanBoardProps) => {
           color={colorMode == "dark" ? tab.color : tab.badgeBg}
           count={tasks.filter((t) => t.status === tab.key).length}
           tasks={tasks.filter((t) => t.status === tab.key)}
-          onAdd={() => useTaskStore.getState().openNewTaskDialog("todo")}
+          onAdd={() => useTaskStore.getState().openNewTaskDialog(tab.key)}
         />
       ))}
     </Flex>

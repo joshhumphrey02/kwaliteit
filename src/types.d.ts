@@ -14,13 +14,20 @@ type TaskFilter = {
   search: string;
 };
 
+type TaskPriority = "Medium" | "Important" | "Urgent" | "Low";
+
 type Task = {
   id: string;
   name: string;
   startDate: string;
   endDate: string;
-  users: number;
-  priority: "Medium" | "Important" | "Urgent" | "Low";
+  users: User[];
+  priority: TaskPriority;
   status: TaskStatus;
   description?: string;
+};
+
+type User = {
+  name: string;
+  src: string;
 };

@@ -7,6 +7,7 @@ import {
   Sort,
 } from "iconsax-reactjs";
 import { useColorMode } from "../ui/color-mode";
+import { useTaskStore } from "@/store";
 
 export function TodoHeader() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -59,6 +60,7 @@ export function TodoHeader() {
           variant="outline"
           bg={"brand"}
           rounded={"lg"}
+          onClick={() => useTaskStore.getState().openNewTaskDialog("todo")}
         >
           <AddCircle />
           Add Task

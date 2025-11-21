@@ -5,6 +5,8 @@ import "./globals.css";
 import { SideBar } from "@/components/shared/sidebar";
 import { Stack } from "@chakra-ui/react";
 import { Header } from "@/components/shared/header";
+import { GlobalModals } from "@/components/global/modals";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,7 +47,9 @@ export default function RootLayout({
               </Stack>
             </Stack>
           </Stack>
+          <GlobalModals />
         </Provider>
+        <Toaster position="top-right" richColors duration={4000} />
       </body>
     </html>
   );

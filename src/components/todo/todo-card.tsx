@@ -2,6 +2,7 @@ import { Box, Flex, Text, Icon } from "@chakra-ui/react";
 import { TodoAvatar } from "./todo-avatar";
 import { Calendar, Flag, User } from "iconsax-reactjs";
 import { TodoActionDropdown } from "./todo-actions-dropdown";
+import { format } from "date-fns";
 
 export const TodoCard = ({ task }: { task: Task }) => {
   return (
@@ -23,13 +24,14 @@ export const TodoCard = ({ task }: { task: Task }) => {
       <Flex align="center" gap={2} fontSize="sm" color="fg.muted" mb={2}>
         <Icon size={"sm"} as={Calendar} />
         <Text>
-          {task.startDate} - {task.endDate}
+          {format(new Date(task.startDate), "dd/MM/yyyy")} -{" "}
+          {format(new Date(task.endDate), "dd/MM/yyyy")}
         </Text>
       </Flex>
 
       <Flex align="center" gap={2} fontSize="sm" color="fg.muted" mb={2}>
         <Icon size={"sm"} as={User} />
-        <TodoAvatar size="xs" count={3} />
+        <TodoAvatar size="xs" users={task?.users || []} />
       </Flex>
 
       <Flex align="center" gap={2}>

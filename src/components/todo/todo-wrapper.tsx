@@ -31,7 +31,8 @@ export function TodoWrapper() {
       .filter((t) =>
         taskFilter.tab !== "all" ? t.status == taskFilter.tab : true
       )
-      .filter((t) => contains(t.name, taskFilter.search));
+      .filter((t) => contains(t.name, taskFilter.search))
+      .sort((a, b) => Number(b.id) - Number(a.id));
   }, [tasks, taskFilter]);
   return (
     <Stack bg={"Background"} py={6} gap={4} rounded={"2xl"}>

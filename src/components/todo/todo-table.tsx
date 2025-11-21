@@ -1,19 +1,21 @@
 "use client";
 
 import {
-  Button,
   ButtonGroup,
+  EmptyState,
   HStack,
   Icon,
   IconButton,
   Pagination,
   Stack,
   Table,
+  VStack,
 } from "@chakra-ui/react";
-import { Flag, More } from "iconsax-reactjs";
+import { Flag, Task } from "iconsax-reactjs";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { TodoAvatar } from "./todo-avatar";
 import { TodoActionDropdown } from "./todo-actions-dropdown";
+import { format } from "date-fns";
 
 const PRIORITY_COLORS: Record<string, string> = {
   Important: "red",
@@ -50,10 +52,11 @@ export function TodoTable({ tasks }: TodoTableProps) {
             <Table.Row key={item.id}>
               <Table.Cell>{item.name}</Table.Cell>
               <Table.Cell>
-                {item.startDate} - {item.endDate}
+                {format(new Date(item.startDate), "dd/MM/yyyy")} -{" "}
+                {format(new Date(item.endDate), "dd/MM/yyyy")}
               </Table.Cell>
               <Table.Cell>
-                <TodoAvatar count={item.users} />
+                <TodoAvatar users={item?.users || []} />
               </Table.Cell>
               <Table.Cell>
                 <HStack w="full">
@@ -74,29 +77,46 @@ export function TodoTable({ tasks }: TodoTableProps) {
         </Table.Body>
       </Table.Root>
 
-      <Pagination.Root count={tasks.length * 5} pageSize={5} page={1}>
-        <ButtonGroup variant="ghost" size="sm" wrap="wrap">
-          <Pagination.PrevTrigger asChild>
-            <IconButton>
-              <LuChevronLeft />
-            </IconButton>
-          </Pagination.PrevTrigger>
-
-          <Pagination.Items
-            render={(page) => (
-              <IconButton variant={{ base: "ghost", _selected: "outline" }}>
-                {page.value}
+      {tasks.length < 1 && (
+        <EmptyState.Root w={"full"}>
+          <EmptyState.Content mx={"auto"}>
+            <EmptyState.Indicator>
+              <Task />
+            </EmptyState.Indicator>
+            <VStack textAlign="center">
+              <EmptyState.Title>No Tasks Found</EmptyState.Title>
+              <EmptyState.Description>
+                Add tasks to see them here
+              </EmptyState.Description>
+            </VStack>
+          </EmptyState.Content>
+        </EmptyState.Root>
+      )}
+      {tasks.length > 0 && (
+        <Pagination.Root count={tasks.length * 5} pageSize={5} page={1}>
+          <ButtonGroup variant="ghost" size="sm" wrap="wrap">
+            <Pagination.PrevTrigger asChild>
+              <IconButton>
+                <LuChevronLeft />
               </IconButton>
-            )}
-          />
+            </Pagination.PrevTrigger>
 
-          <Pagination.NextTrigger asChild>
-            <IconButton>
-              <LuChevronRight />
-            </IconButton>
-          </Pagination.NextTrigger>
-        </ButtonGroup>
-      </Pagination.Root>
+            <Pagination.Items
+              render={(page) => (
+                <IconButton variant={{ base: "ghost", _selected: "outline" }}>
+                  {page.value}
+                </IconButton>
+              )}
+            />
+
+            <Pagination.NextTrigger asChild>
+              <IconButton>
+                <LuChevronRight />
+              </IconButton>
+            </Pagination.NextTrigger>
+          </ButtonGroup>
+        </Pagination.Root>
+      )}
     </Stack>
   );
 }

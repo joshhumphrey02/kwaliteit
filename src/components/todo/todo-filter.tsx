@@ -127,8 +127,9 @@ export function TodoFilter({
             >
               <Icon>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  {icons.map((icon) =>
+                  {icons.map((icon, i) =>
                     React.cloneElement(icon, {
+                      key: i,
                       fill: active ? "white" : color,
                     })
                   )}

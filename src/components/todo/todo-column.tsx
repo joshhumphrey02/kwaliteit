@@ -1,7 +1,16 @@
-import { Box, Flex, Text, Button, Badge, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Button,
+  Badge,
+  HStack,
+  EmptyState,
+  VStack,
+} from "@chakra-ui/react";
 import { LuPlus } from "react-icons/lu";
 import { TodoCard } from "./todo-card";
-import { Add } from "iconsax-reactjs";
+import { Add, Task } from "iconsax-reactjs";
 
 interface TaskColumnProps {
   title: string;
@@ -61,11 +70,27 @@ export const TodoColumn = ({
         </Button>
       </Flex>
 
-      <Flex direction="column" gap={2}>
-        {tasks.map((task) => (
-          <TodoCard key={task.id} task={task} />
-        ))}
-      </Flex>
+      {tasks?.length > 0 ? (
+        <Flex direction="column" gap={2}>
+          {tasks.map((task) => (
+            <TodoCard key={task.id} task={task} />
+          ))}
+        </Flex>
+      ) : (
+        <EmptyState.Root w={"full"} bg="Background" rounded={"xl"}>
+          <EmptyState.Content mx={"auto"}>
+            <EmptyState.Indicator>
+              <Task />
+            </EmptyState.Indicator>
+            <VStack textAlign="center">
+              <EmptyState.Title>No Tasks Found</EmptyState.Title>
+              <EmptyState.Description>
+                Add tasks to see them here
+              </EmptyState.Description>
+            </VStack>
+          </EmptyState.Content>
+        </EmptyState.Root>
+      )}
 
       <Button
         variant="ghost"

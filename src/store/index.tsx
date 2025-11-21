@@ -4,7 +4,7 @@ import { persist, PersistOptions } from "zustand/middleware";
 
 interface State {
   tasks: Task[];
-  TaskDialog: {
+  taskDialog: {
     isOpen: boolean;
     type: TaskStatus;
     activeTask?: Task;
@@ -21,6 +21,7 @@ interface Actions {
   updateTask: (id: string, data: Partial<Task>) => void;
   deleteTask: (id: string) => void;
   setTasks: (tasks: Task[]) => void;
+  closeTaskDialog: () => void;
 }
 
 type StateAndActions = State & Actions;
@@ -34,7 +35,7 @@ export const useTaskStore = create<StateAndActions>()(
   (persist as MyTaskStore)(
     (set, get) => ({
       tasks: intialData,
-      TaskDialog: {
+      taskDialog: {
         isOpen: false,
         type: "todo",
         activeTask: undefined,
@@ -46,7 +47,7 @@ export const useTaskStore = create<StateAndActions>()(
             ...state.tasks,
             {
               ...task,
-              id: Date.now().toString(),
+              id: (get().tasks.length + 1).toString(),
             },
           ],
         })),
@@ -66,17 +67,26 @@ export const useTaskStore = create<StateAndActions>()(
       setTasks: (tasks) => set({ tasks }),
       openNewTaskDialog: (type, mode, activeTask) =>
         set({
-          TaskDialog: {
+          taskDialog: {
             mode: mode || "new",
             type,
             isOpen: true,
             activeTask,
           },
         }),
+      closeTaskDialog: () =>
+        set({
+          taskDialog: {
+            mode: "new",
+            type: "todo",
+            isOpen: false,
+            activeTask: undefined,
+          },
+        }),
     }),
     {
       name: "task-storage",
-      partialize: (state) => state,
+      //   partialize: (state) => state,
     }
   )
 );
