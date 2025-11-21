@@ -269,7 +269,7 @@ export const TaskDialogDate = ({ form, setForm }: Props) => {
         <Menu.Trigger asChild>
           <Badge rounded="md">
             {form?.endDate ? (
-              <Text fontWeight="medium" fontSize={"sm"}>
+              <Text fontWeight="medium" fontSize={"md"}>
                 {format(new Date(form?.startDate!), "dd/MM/yyyy")} -
                 {format(new Date(form?.endDate), "dd/MM/yyyy")}
               </Text>
