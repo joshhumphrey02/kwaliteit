@@ -86,7 +86,7 @@ export const useTaskStore = create<StateAndActions>()(
     }),
     {
       name: "task-storage",
-      //   partialize: (state) => state,
+      partialize: (state) => state,
     }
   )
 );
